@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Builds raw/decision-canvas.html -- the Kaiser Permanente + Risant Health
+Builds raw/decision-canvas.html: the Kaiser Permanente + Risant Health
 "Enterprise Application Value Inversion" interactive decision canvas.
 
 Format: follows the same click-driven tab/panel architecture as
@@ -29,7 +29,7 @@ KP_WHITE = f"data:image/png;base64,{LOGOS['kp_white']}"
 RISANT_COLOR = f"data:image/png;base64,{LOGOS['risant_color']}"
 RISANT_WHITE = f"data:image/png;base64,{LOGOS['risant_white']}"
 
-# Deck screenshots (cropped directly from the source PPTX renders) -- used
+# Deck screenshots (cropped directly from the source PPTX renders), used
 # in place of CSS recreations for diagrams too visually rich to rebuild
 # faithfully: the Blind Spot two-box diagram, the full Microsoft IQ platform
 # architecture, the Compounding Return chart, and the Enterprise Data
@@ -411,10 +411,10 @@ HERO = f"""
   </div>
   <p class="eyebrow"><span class="pulse-dot" aria-hidden="true"></span> Kaiser Permanente + Risant Health &middot; Executive decision canvas</p>
   <h1>The Enterprise Application <em>Value Inversion</em></h1>
-  <p class="lede">The total cost of your application portfolio is inverting. This canvas walks the strategic argument, the Kaiser Permanente-specific economics, and the practical next step &mdash; click through Problem, Status Quo, Opportunity, New Approach, and Plan.</p>
+  <p class="lede">The total cost of your application portfolio is inverting. This canvas walks the strategic argument, the Kaiser Permanente-specific economics, and the practical next step: click through Problem, Status Quo, Opportunity, New Approach, and Plan.</p>
   <div class="hero-foot">
     <span>Prepared by Microsoft for Kaiser Permanente + Risant Health &middot; confidential</span>
-    <span>All figures illustrative unless noted &mdash; see Plan tab for sourcing</span>
+    <span>All figures illustrative unless noted; see Plan tab for sourcing</span>
   </div>
 </section>
 """
@@ -443,13 +443,13 @@ PANEL_PROBLEM = """
 <section id="problem" class="panel active" aria-labelledby="problem-title">
   <div class="panel-head">
     <h2 id="problem-title">Costs are climbing because value already moved.</h2>
-    <p>AI didn't add a feature to enterprise software. It changed where value lives &mdash; and that shift is what's driving cost up across the portfolio.</p>
+    <p>AI didn't add a feature to enterprise software. It changed where value lives, and that shift is what's driving cost up across the portfolio.</p>
   </div>
 
   <div class="twin-cards">
     <div class="twin-card disruption">
       <span class="twin-tag disruption">The disruption</span>
-      <p>Agentic AI can now perform the work SaaS interfaces were built for &mdash; no human has to open the tool. <b>Legacy SaaS valuations</b> already took real hits in 2026 as capital rotates toward AI infrastructure. Some call it the <b>&ldquo;SaaSpocalypse.&rdquo;</b></p>
+      <p>Agentic AI can now perform the work SaaS interfaces were built for. No human has to open the tool. <b>Legacy SaaS valuations</b> already took real hits in 2026 as capital rotates toward AI infrastructure. Some call it the <b>&ldquo;SaaSpocalypse.&rdquo;</b></p>
     </div>
     <div class="twin-card squeeze">
       <span class="twin-tag squeeze">The cost squeeze</span>
@@ -460,18 +460,18 @@ PANEL_PROBLEM = """
   <div class="card">
     <div class="card-header">
       <h3>The Enterprise Application Value Inversion</h3>
-      <p>Click a layer on either side to see where it's headed &mdash; then read the executive question below.</p>
+      <p>Click a layer on either side to see where it's headed, then read the executive question below.</p>
     </div>
     <div class="section-grid">
       <div>
         <div class="stack-wrap">
           <div>
-            <div class="stack-col-label"><span>Then &mdash; value concentrated in</span><span class="dir-down">&#9660; declining</span></div>
+            <div class="stack-col-label"><span>Then: value concentrated in</span><span class="dir-down">&#9660; declining</span></div>
             <div class="stack" id="stackThen"></div>
           </div>
           <div class="stack-mid-label">the inversion</div>
           <div>
-            <div class="stack-col-label"><span>Now &mdash; value concentrated in</span><span class="dir-up">&#9650; rising</span></div>
+            <div class="stack-col-label"><span>Now: value concentrated in</span><span class="dir-up">&#9650; rising</span></div>
             <div class="stack" id="stackNow"></div>
           </div>
         </div>
@@ -484,7 +484,7 @@ PANEL_PROBLEM = """
   <div class="card">
     <div class="card-header">
       <h3>Why costs keep climbing</h3>
-      <p>Premium application vendors are not hyperscalers &mdash; they rent compute from them. Click each row for the structural comparison.</p>
+      <p>Premium application vendors are not hyperscalers; they rent compute from them. Click each row for the structural comparison.</p>
     </div>
     <div class="section-grid">
       <div id="compareRows"></div>
@@ -510,14 +510,14 @@ PANEL_PROBLEM = """
 PANEL_STATUS_QUO = f"""
 <section id="status-quo" class="panel" aria-labelledby="status-quo-title">
   <div class="panel-head">
-    <h2 id="status-quo-title">This is the status quo &mdash; and it doesn't work.</h2>
+    <h2 id="status-quo-title">This is the status quo, and it doesn't work.</h2>
     <p>AI is only as smart as the context it can reach. Most enterprises hand their Copilot one connector into a fragmented stack.</p>
   </div>
 
   <div class="card">
     <div class="card-header"><h3>The blind spot</h3><p>Most Copilots answer questions. Few actually know your business.</p></div>
     <img class="deck-screenshot" src="{IMG_BLIND_SPOT}" alt="The familiar picture: one connected system, everything else stays a silo Copilot can't see. The fuller picture: every system connected, nothing hidden from view." />
-    <div class="footer-strip">None of this requires ripping anything out. AI can extend what you already run today &mdash; Salesforce, Workday, and more &mdash; on one shared foundation, with no separate layer to license or maintain.</div>
+    <div class="footer-strip">None of this requires ripping anything out. AI can extend what you already run today (Salesforce, Workday, and more) on one shared foundation, with no separate layer to license or maintain.</div>
   </div>
 
   <div class="card">
@@ -533,7 +533,7 @@ PANEL_STATUS_QUO = f"""
       <div class="handoff-card"><b>Treatment</b>Care team coordinates across systems that don't talk to each other <span class="x">&#10005;</span></div>
       <div class="handoff-card"><b>Survivorship</b>Follow-up care depends on someone remembering to make the call <span class="x">&#10005;</span></div>
     </div>
-    <div class="footer-strip">The problem was never the model. It's what the model can't see &mdash; and it costs trust at the exact moments Kaiser Permanente and Risant Health's mission depends on it most.</div>
+    <div class="footer-strip">The problem was never the model. It's what the model can't see, and it costs trust at the exact moments Kaiser Permanente and Risant Health's mission depends on it most.</div>
     <p class="source-note">Industry-wide research findings, not Kaiser Permanente or Risant Health-specific data. Care-journey pattern is illustrative, based on common cross-system handoff points in large integrated delivery networks.</p>
   </div>
 </section>
@@ -543,7 +543,7 @@ PANEL_OPPORTUNITY = """
 <section id="opportunity" class="panel" aria-labelledby="opportunity-title">
   <div class="panel-head">
     <h2 id="opportunity-title">What this is worth to Kaiser Permanente + Risant Health.</h2>
-    <p>Grounded in Kaiser Permanente's own AI-BPS cost data &mdash; not generic industry benchmarks.</p>
+    <p>Grounded in Kaiser Permanente's own AI-BPS cost data, not generic industry benchmarks.</p>
   </div>
 
   <div class="card">
@@ -559,7 +559,7 @@ PANEL_OPPORTUNITY = """
   </div>
 
   <div class="card">
-    <div class="card-header"><h3>The $391.7M opportunity</h3><p>What a 10%-a-year migration to Microsoft saves &mdash; annual cost savings vs. today's spend, Year 1&ndash;10.</p></div>
+    <div class="card-header"><h3>The $391.7M opportunity</h3><p>What a 10%-a-year migration to Microsoft saves: annual cost savings vs. today's spend, Year 1&ndash;10.</p></div>
     <div class="chart-wrap">
       <div class="chart-bars" id="savingsChart"></div>
       <div class="chart-legend">
@@ -571,7 +571,7 @@ PANEL_OPPORTUNITY = """
       <div class="stat-card" style="border-top-color:var(--cp-green)"><div class="stat-num" style="color:var(--cp-green)">$367M</div><p>Save up to this much every year by Year 10, once fully migrated (as low as $178M/yr if broadly licensed)</p></div>
       <div class="stat-card" style="border-top-color:var(--cp-green)"><div class="stat-num" style="color:var(--cp-green)">$2.0B</div><p>Up to this much in cumulative 10-year savings (as low as $980M if broadly licensed)</p></div>
     </div>
-    <p class="source-note">Figures are NET savings: third-party spend avoided minus the Microsoft license cost incurred. Per-user list pricing provided by the Kaiser Permanente account team. Illustrative, not a quote &mdash; actual pace and mix will vary by workload.</p>
+    <p class="source-note">Figures are NET savings: third-party spend avoided minus the Microsoft license cost incurred. Per-user list pricing provided by the Kaiser Permanente account team. Illustrative, not a quote. Actual pace and mix will vary by workload.</p>
   </div>
 
   <div class="card">
@@ -597,14 +597,14 @@ PANEL_NEW_APPROACH = f"""
 <section id="new-approach" class="panel" aria-labelledby="new-approach-title">
   <div class="panel-head">
     <h2 id="new-approach-title">The blue ocean strategy: one platform, five connected IQs.</h2>
-    <p>Not a better version of the same fragmented approach &mdash; a fundamentally different starting point. Real intelligence needs these things connected, not five vendors guessing alone.</p>
+    <p>Not a better version of the same fragmented approach: a fundamentally different starting point. Real intelligence needs these things connected, not five vendors guessing alone.</p>
   </div>
 
   <div class="card">
-    <div class="card-header"><h3>Your enterprise data, unlocked</h3><p>Click each IQ to see what it connects &mdash; the detail sits below, centralized, no matter which you pick.</p></div>
+    <div class="card-header"><h3>Your enterprise data, unlocked</h3><p>Click each IQ to see what it connects; the detail sits below, centralized, no matter which you pick.</p></div>
     <div class="pick-grid-wide" id="fiveThingsGrid"></div>
     <aside class="detail-panel detail-panel-below" id="fiveThingsDetail" tabindex="0"></aside>
-    <div class="footer-strip">Connected together, this is where real intelligence lives &mdash; most vendors only ever give you one.</div>
+    <div class="footer-strip">Connected together, this is where real intelligence lives; most vendors only ever give you one.</div>
   </div>
 
   <div class="card">
@@ -614,7 +614,7 @@ PANEL_NEW_APPROACH = f"""
   </div>
 
   <div class="card">
-    <div class="card-header"><h3>Proof it works</h3><p>This isn't theoretical. Grounded AI is already changing how care gets delivered &mdash; these are industry-wide patterns, not Kaiser Permanente-specific results yet.</p></div>
+    <div class="card-header"><h3>Proof it works</h3><p>This isn't theoretical. Grounded AI is already changing how care gets delivered; these are industry-wide patterns, not Kaiser Permanente-specific results yet.</p></div>
     <div class="stat-grid" id="proofGrid"></div>
   </div>
 
@@ -650,7 +650,7 @@ PANEL_PLAN = f"""
   </div>
 
   <div class="card">
-    <div class="card-header"><h3>What it takes to get there</h3><p>One decision, two compounding returns &mdash; but only if you actually make the shift.</p></div>
+    <div class="card-header"><h3>What it takes to get there</h3><p>One decision, two compounding returns, but only if you actually make the shift.</p></div>
     <div class="get-there-list">
       <div class="get-there-step">
         <span class="get-there-badge" style="background:#64748B">1</span>
@@ -694,14 +694,14 @@ JS = """
 const stackThenItems = [
   { label: "User Interfaces", weight: 34, color: "#006BA6", detail: "Screens and forms were the product for two decades. That's exactly the layer AI agents route around first." },
   { label: "Workflows", weight: 24, color: "#1464C8", detail: "Step-by-step click paths built for humans lose relevance once an agent can execute the underlying task directly." },
-  { label: "Reporting", weight: 18, color: "#2E5A96", detail: "Dashboards summarize data for a human to read. An agent doesn't need a summary -- it needs the data itself." },
+  { label: "Reporting", weight: 18, color: "#2E5A96", detail: "Dashboards summarize data for a human to read. An agent doesn't need a summary; it needs the data itself." },
   { label: "Custom Screens", weight: 13, color: "#16344f", detail: "Bespoke UI built for one team's workflow is the most expensive kind of value to maintain, and the first to go stale." },
   { label: "Embedded Analytics", weight: 11, color: "#0d2038", detail: "Point-in-time analytics modules are being absorbed into always-on AI orchestration across the whole estate." },
 ];
 const stackNowItems = [
   { label: "Data", weight: 34, color: "#16233a", textColor: "#fff", detail: "Whoever controls clean, unified data controls what every future AI agent can actually do. This is the new center of gravity." },
   { label: "Context & Knowledge", weight: 24, color: "#006BA6", detail: "Policies, history, and institutional memory are what make an answer trustworthy instead of merely plausible." },
-  { label: "Compute", weight: 13, color: "#008575", textColor: "#fff", detail: "Every AI action costs compute. Whoever owns the compute layer captures the margin -- or pays someone else's markup for it." },
+  { label: "Compute", weight: 13, color: "#008575", textColor: "#fff", detail: "Every AI action costs compute. Whoever owns the compute layer captures the margin, or pays someone else's markup for it." },
   { label: "AI Orchestration", weight: 11, color: "#742774", textColor: "#fff", detail: "Coordinating agents across systems, not just answering one question at a time, is where the next wave of value concentrates." },
 ];
 
@@ -715,19 +715,19 @@ const compareRows = [
   },
   {
     label: "MICROSOFT",
-    title: "Application + Cloud \u2014 one company",
+    title: "Application + Cloud: one company",
     sub: "Hyperscaler and business applications vendor, together",
     bars: [{ pct: 100, color: "#008575", label: "license only, no markup slice" }],
-    detail: "Microsoft is the leading vendor that is both a hyperscaler and a business applications company \u2014 eliminating the compute pass-through markup embedded in premium SaaS contracts like these. (Not the only vendor to span both \u2014 Oracle does as well \u2014 but the most complete version of that model at enterprise scale.)",
+    detail: "Microsoft is the leading vendor that is both a hyperscaler and a business applications company, eliminating the compute pass-through markup embedded in premium SaaS contracts like these. (Oracle also spans both, but Microsoft is the most complete version of that model at enterprise scale.)",
   },
 ];
 
 const fiveThings = [
   { title: "How your people work", meta: "Work IQ", color: "#006BA6", detail: "Roles, workflows, files, meetings, and the day-to-day rhythm of the organization. This is the context most Copilots already have some access to." },
-  { title: "How you understand your customers", meta: "Customer IQ", color: "#B8792A", detail: "A unified customer profile with engagement signals -- members, patients, and their history, connected instead of scattered across a contact center, a CRM, and a marketing platform." },
-  { title: "How your business runs", meta: "Fabric IQ", color: "#008575", detail: "Data, semantics, rules, and the live signals the business runs on -- claims, encounters, supply chain, finance. Most AI never reaches this layer at all." },
-  { title: "What your org knows", meta: "Foundry IQ", color: "#742774", detail: "Policies, documents, research, and the knowledge locked in institutional memory -- usually scattered across SharePoint, wikis, and people's heads." },
-  { title: "What's happening beyond your walls", meta: "Web IQ", color: "#1464C8", detail: "Public and licensed signal from outside the four walls of the organization -- market, regulatory, and competitive context most internal AI never considers." },
+  { title: "How you understand your customers", meta: "Customer IQ", color: "#B8792A", detail: "A unified customer profile with engagement signals: members, patients, and their history, connected instead of scattered across a contact center, a CRM, and a marketing platform." },
+  { title: "How your business runs", meta: "Fabric IQ", color: "#008575", detail: "Data, semantics, rules, and the live signals the business runs on: claims, encounters, supply chain, finance. Most AI never reaches this layer at all." },
+  { title: "What your org knows", meta: "Foundry IQ", color: "#742774", detail: "Policies, documents, research, and the knowledge locked in institutional memory, usually scattered across SharePoint, wikis, and people's heads." },
+  { title: "What's happening beyond your walls", meta: "Web IQ", color: "#1464C8", detail: "Public and licensed signal from outside the four walls of the organization: market, regulatory, and competitive context most internal AI never considers." },
 ];
 
 const tamItems = [
@@ -736,10 +736,10 @@ const tamItems = [
     detail: "Automation and low-code tooling spend that could consolidate onto one shared, low-code application platform instead of several standalone automation vendors." },
   { title: "Member & Patient Experience", meta: "$132M addressable", color: "#006BA6",
     vendors: ["Salesforce", "Marketo", "Pega", "NICE*", "Genesys", "Avaya", "Cisco"],
-    detail: "The largest single category -- customer engagement, contact center, and marketing platforms that each carry their own rented-compute markup and isolated data layer." },
+    detail: "The largest single category: customer engagement, contact center, and marketing platforms that each carry their own rented-compute markup and isolated data layer." },
   { title: "Finance & Operations", meta: "$223.8M addressable", color: "#008575",
     vendors: ["SAP", "Oracle PeopleSoft", "Kronos", "Concur", "SAP Ariba", "Workday"],
-    detail: "The single largest addressable category -- ERP, HR, and procurement systems that are prime candidates for consolidation onto one shared data + AI foundation." },
+    detail: "The single largest addressable category: ERP, HR, and procurement systems that are prime candidates for consolidation onto one shared data + AI foundation." },
 ];
 
 const proofItems = [
@@ -822,7 +822,7 @@ function wireStackClicks() {
       const isThen = seg.closest("#stackThen") !== null;
       const idx = Number(seg.dataset.index);
       const item = (isThen ? stackThenItems : stackNowItems)[idx];
-      detail.innerHTML = `<p class="kicker">${isThen ? "Then \u2014 declining" : "Now \u2014 rising"}</p><h4>${item.label}</h4><p>${item.detail}</p>`;
+      detail.innerHTML = `<p class="kicker">${isThen ? "Then: declining" : "Now: rising"}</p><h4>${item.label}</h4><p>${item.detail}</p>`;
     });
   });
 }
