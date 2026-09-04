@@ -369,12 +369,6 @@ h1 em { color: var(--cp-accent); font-style: italic; }
 .next-step-box .tag { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; color: var(--cp-gold); margin-bottom: 6px; }
 .next-step-box p { margin: 0; font-size: 0.92rem; opacity: 0.92; }
 
-.plan-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 20px; }
-.plan-card { border: 1px solid var(--cp-border); border-radius: 12px; padding: 16px; background: var(--cp-surface); }
-.plan-number { font-size: 0.75rem; font-weight: 700; color: var(--cp-accent); margin-bottom: 6px; }
-.plan-card h5 { margin: 0 0 6px; font-size: 0.98rem; }
-.plan-card p { margin: 0; font-size: 0.85rem; color: var(--cp-text-muted); line-height: 1.45; }
-
 .source-note { font-size: 0.76rem; color: var(--cp-text-soft); font-style: italic; margin-top: 10px; line-height: 1.5; }
 
 .tooltip {
@@ -388,7 +382,7 @@ h1 em { color: var(--cp-accent); font-style: italic; }
 footer.hub-footer { text-align: center; padding: 24px; color: var(--cp-text-soft); font-size: 0.8rem; }
 
 @media (max-width: 1060px) {
-  .section-grid, .twin-cards, .compare-row, .stack-wrap, .blind-compare, .reframe-grid, .compound-grid, .entity-grid, .plan-options, .arch-row.split { grid-template-columns: 1fr; }
+  .section-grid, .twin-cards, .compare-row, .stack-wrap, .blind-compare, .reframe-grid, .compound-grid, .entity-grid, .arch-row.split { grid-template-columns: 1fr; }
   .handoff-row { grid-template-columns: repeat(2, 1fr); }
   .tabs { grid-template-columns: repeat(2, 1fr); }
   .detail-panel { position: static; }
@@ -439,7 +433,7 @@ TABS_NAV = """
   <button class="tab-button" data-tab="new-approach" data-tip-title="New Approach" data-tip="The blue ocean strategy: one platform with five connected IQs, the full Microsoft IQ architecture, and proof the compounding return is real.">
     <span class="tab-num">04</span>New Approach
   </button>
-  <button class="tab-button" data-tab="plan" data-tip-title="Plan" data-tip="What it takes to get there, the harder question, and three practical, low-friction ways to start.">
+  <button class="tab-button" data-tab="plan" data-tip-title="Plan" data-tip="The harder question that matters more than scrutiny, and what it takes to get there.">
     <span class="tab-num">05</span>Plan
   </button>
 </nav>
@@ -686,14 +680,6 @@ PANEL_PLAN = f"""
     </div>
   </div>
 
-  <div class="card" style="margin-top:20px">
-    <div class="card-header"><h3>Three practical ways to start</h3></div>
-    <div class="plan-options">
-      <div class="plan-card"><div class="plan-number">01</div><h5>Start with a workshop</h5><p>Validate the $391.7M figure and this year's top consolidation candidates against your own vendor contracts.</p></div>
-      <div class="plan-card"><div class="plan-number">02</div><h5>Pilot one IQ</h5><p>Stand up one connected IQ workload against a live use case and measure it end to end.</p></div>
-      <div class="plan-card"><div class="plan-number">03</div><h5>Architect the foundation</h5><p>Map Work IQ, Customer IQ, Fabric IQ, Foundry IQ, and Web IQ against your actual systems of record before committing to a platform.</p></div>
-    </div>
-  </div>
   <p class="source-note" style="margin-top:8px">All cost figures on this canvas (license increase %, implementation cost, maintenance cost, license savings %, TAM figures) are illustrative ranges based on Microsoft field experience and Kaiser Permanente-provided data as of 2026. They are not audited, vendor-published, or contractually guaranteed. The &ldquo;3&ndash;10% YoY SaaS renewal uplift&rdquo; figure and the term &ldquo;SaaSpocalypse&rdquo; reflect widely discussed industry commentary, not audited vendor data. Recommended next step: a joint TCO workshop using actual vendor invoices and contract terms to replace these illustrative figures with validated numbers.</p>
 </section>
 """
