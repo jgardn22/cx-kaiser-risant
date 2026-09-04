@@ -29,6 +29,17 @@ KP_WHITE = f"data:image/png;base64,{LOGOS['kp_white']}"
 RISANT_COLOR = f"data:image/png;base64,{LOGOS['risant_color']}"
 RISANT_WHITE = f"data:image/png;base64,{LOGOS['risant_white']}"
 
+# Deck screenshots (cropped directly from the source PPTX renders) -- used
+# in place of CSS recreations for diagrams too visually rich to rebuild
+# faithfully: the Blind Spot two-box diagram, the full Microsoft IQ platform
+# architecture, the Compounding Return chart, and the Enterprise Data
+# Unlocked strip. See decks/kp-risant-value-inversion/render/*.png (slides
+# 12, 15, 17, 18) for the originals.
+IMG_BLIND_SPOT = f"data:image/png;base64,{LOGOS['blind_spot']}"
+IMG_IQ_PLATFORM = f"data:image/png;base64,{LOGOS['iq_platform']}"
+IMG_COMPOUNDING_CHART = f"data:image/png;base64,{LOGOS['compounding_chart']}"
+IMG_ENTERPRISE_DATA = f"data:image/png;base64,{LOGOS['enterprise_data']}"
+
 # ============================================================== CSS =======
 CSS = """
 :root {
@@ -187,6 +198,34 @@ h1 em { color: var(--cp-accent); font-style: italic; }
 .detail-panel .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
 .detail-tag { font-size: 0.72rem; padding: 3px 9px; border-radius: 999px; background: var(--cp-accent-soft); color: var(--cp-accent); font-weight: 600; }
 
+/* detail panel that sits centered below a picker row instead of beside it */
+.detail-panel-below {
+  border: 1px solid var(--cp-border); border-radius: 14px; background: var(--cp-surface-soft);
+  padding: 22px; margin-top: 14px; position: static; top: auto; min-height: 0;
+}
+.detail-panel-below .kicker { margin: 0 0 6px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cp-accent); }
+.detail-panel-below h4 { margin: 0 0 8px; font-size: 1.1rem; }
+.detail-panel-below p { margin: 0; color: var(--cp-text-muted); font-size: 0.95rem; line-height: 1.55; max-width: 760px; }
+
+/* embedded deck screenshots (source-of-truth imagery we chose not to recreate in CSS) */
+.deck-screenshot {
+  display: block; width: 100%; height: auto; border-radius: 12px;
+  border: 1px solid var(--cp-border); margin: 10px 0;
+}
+
+/* "what it takes to get there" numbered step list */
+.get-there-list { display: flex; flex-direction: column; gap: 4px; margin-top: 4px; }
+.get-there-step { display: flex; align-items: flex-start; gap: 16px; padding: 12px 4px; position: relative; }
+.get-there-step:not(:last-child)::after {
+  content: ""; position: absolute; left: 19px; top: 46px; bottom: -4px; width: 2px; background: var(--cp-border);
+}
+.get-there-badge {
+  flex-shrink: 0; width: 40px; height: 40px; border-radius: 999px; display: flex; align-items: center;
+  justify-content: center; font-weight: 800; font-size: 1.05rem; color: #fff; z-index: 1;
+}
+.get-there-step h5 { margin: 0 0 4px; font-size: 1rem; }
+.get-there-step p { margin: 0; font-size: 0.88rem; color: var(--cp-text-muted); line-height: 1.45; }
+
 /* twin concept cards (Problem tab) */
 .twin-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 4px 0 18px; }
 .twin-card { border-radius: 14px; padding: 18px; border: 1px solid var(--cp-border); }
@@ -228,6 +267,7 @@ h1 em { color: var(--cp-accent); font-style: italic; }
 
 /* clickable pick group (generic) */
 .pick-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 6px; }
+.pick-grid-wide { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 6px; }
 .pick-btn { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; text-align: left; border: 1px solid var(--cp-border); border-radius: 12px; padding: 14px; background: var(--cp-surface); cursor: pointer; transition: border-color 150ms ease, transform 150ms ease; }
 .pick-btn:hover { transform: translateY(-2px); }
 .pick-btn.active { border-color: var(--cp-accent); background: var(--cp-accent-soft); }
@@ -377,7 +417,7 @@ HERO = f"""
   </div>
   <p class="eyebrow"><span class="pulse-dot" aria-hidden="true"></span> Kaiser Permanente + Risant Health &middot; Executive decision canvas</p>
   <h1>The Enterprise Application <em>Value Inversion</em></h1>
-  <p class="lede">The total cost of your application portfolio is inverting. This canvas walks the strategic argument, the Kaiser Permanente-specific economics, and the practical next step &mdash; click through Problem, Approach, Control, Payoff, and Plan.</p>
+  <p class="lede">The total cost of your application portfolio is inverting. This canvas walks the strategic argument, the Kaiser Permanente-specific economics, and the practical next step &mdash; click through Problem, Status Quo, Opportunity, New Approach, and Plan.</p>
   <div class="hero-foot">
     <span>Prepared by Microsoft for Kaiser Permanente + Risant Health &middot; confidential</span>
     <span>All figures illustrative unless noted &mdash; see Plan tab for sourcing</span>
@@ -390,16 +430,16 @@ TABS_NAV = """
   <button class="tab-button active" data-tab="problem" data-tip-title="Problem" data-tip="Set up why application costs keep climbing: the SaaSpocalypse, the value inversion, the hyperscaler tax, and the compounding cost of bolted-on AI.">
     <span class="tab-num">01</span>Problem
   </button>
-  <button class="tab-button" data-tab="approach" data-tip-title="Approach" data-tip="Show why most Copilots only see one system, and how Work IQ, Foundry IQ, and Fabric IQ connect people, knowledge, and business data into one foundation.">
-    <span class="tab-num">02</span>Approach
+  <button class="tab-button" data-tab="status-quo" data-tip-title="Status Quo" data-tip="Show what the status quo approach actually looks like today: Copilots that only see one system, and the fragmented-context research proving why most enterprise AI never pays off.">
+    <span class="tab-num">02</span>Status Quo
   </button>
-  <button class="tab-button" data-tab="control" data-tip-title="Control" data-tip="Use with CIO/CTO stakeholders: agentic AI needs identity, policy, lifecycle, audit, telemetry, and cost control from day one.">
-    <span class="tab-num">03</span>Control
+  <button class="tab-button" data-tab="opportunity" data-tip-title="Opportunity" data-tip="Ground the argument in Kaiser Permanente's own numbers: the $391.7M TAM, the 10-year savings model, and what it's worth split across Kaiser Permanente + Risant Health.">
+    <span class="tab-num">03</span>Opportunity
   </button>
-  <button class="tab-button" data-tab="payoff" data-tip-title="Payoff" data-tip="Ground the argument in Kaiser Permanente's own numbers: the $391.7M TAM, the 10-year savings model, and industry proof points.">
-    <span class="tab-num">04</span>Payoff
+  <button class="tab-button" data-tab="new-approach" data-tip-title="New Approach" data-tip="The blue ocean strategy: one platform with five connected IQs, the full Microsoft IQ architecture, and proof the compounding return is real.">
+    <span class="tab-num">04</span>New Approach
   </button>
-  <button class="tab-button" data-tab="plan" data-tip-title="Plan" data-tip="Close with the harder question and three practical, low-friction ways to start.">
+  <button class="tab-button" data-tab="plan" data-tip-title="Plan" data-tip="What it takes to get there, the harder question, and three practical, low-friction ways to start.">
     <span class="tab-num">05</span>Plan
   </button>
 </nav>
@@ -473,31 +513,16 @@ PANEL_PROBLEM = """
 </section>
 """
 
-PANEL_APPROACH = """
-<section id="approach" class="panel" aria-labelledby="approach-title">
+PANEL_STATUS_QUO = f"""
+<section id="status-quo" class="panel" aria-labelledby="status-quo-title">
   <div class="panel-head">
-    <h2 id="approach-title">Real intelligence needs three things connected &mdash; not three vendors guessing alone.</h2>
+    <h2 id="status-quo-title">This is the status quo &mdash; and it doesn't work.</h2>
     <p>AI is only as smart as the context it can reach. Most enterprises hand their Copilot one connector into a fragmented stack.</p>
   </div>
 
   <div class="card">
     <div class="card-header"><h3>The blind spot</h3><p>Most Copilots answer questions. Few actually know your business.</p></div>
-    <div class="blind-compare">
-      <div class="blind-box familiar">
-        <div class="blind-title" style="color:var(--cp-text-soft)">The familiar picture</div>
-        <div class="node-row" style="color:var(--cp-text-soft)">
-          <div class="node">&#9642;</div><div class="node hub" style="color:var(--cp-accent);border-color:var(--cp-accent)"><span style="color:#fff">AI</span></div><div class="node">&#9642;</div>
-        </div>
-        <div class="node-row" style="color:var(--cp-text-soft);opacity:.5"><div class="node">&#9642;</div><div class="node">&#9642;</div></div>
-        <p class="blind-caption">One connected system. Everything else stays a silo Copilot can't see.</p>
-      </div>
-      <div class="blind-box fuller">
-        <div class="blind-title">The fuller picture</div>
-        <div class="node-row"><div class="node">&#9642;</div><div class="node hub" style="background:#fff;color:var(--cp-accent);border-color:#fff"><span>AI</span></div><div class="node">&#9642;</div></div>
-        <div class="node-row"><div class="node">&#9642;</div><div class="node">&#9642;</div></div>
-        <p class="blind-caption">Every system connected. Nothing hidden from view.</p>
-      </div>
-    </div>
+    <img class="deck-screenshot" src="{IMG_BLIND_SPOT}" alt="The familiar picture: one connected system, everything else stays a silo Copilot can't see. The fuller picture: every system connected, nothing hidden from view." />
     <div class="footer-strip">None of this requires ripping anything out. AI can extend what you already run today &mdash; Salesforce, Workday, and more &mdash; on one shared foundation, with no separate layer to license or maintain.</div>
   </div>
 
@@ -517,62 +542,13 @@ PANEL_APPROACH = """
     <div class="footer-strip">The problem was never the model. It's what the model can't see &mdash; and it costs trust at the exact moments Kaiser Permanente and Risant Health's mission depends on it most.</div>
     <p class="source-note">Industry-wide research findings, not Kaiser Permanente or Risant Health-specific data. Care-journey pattern is illustrative, based on common cross-system handoff points in large integrated delivery networks.</p>
   </div>
-
-  <div class="card">
-    <div class="card-header"><h3>Three things, connected</h3><p>Click each to see how it maps to the Microsoft IQ platform.</p></div>
-    <div class="section-grid">
-      <div class="pick-grid" id="threeThingsGrid"></div>
-      <aside class="detail-panel" id="threeThingsDetail" tabindex="0"></aside>
-    </div>
-    <div class="footer-strip">Connected together, this is where real intelligence lives &mdash; most vendors only ever give you one.</div>
-  </div>
-
-  <div class="card">
-    <div class="card-header"><h3>One platform, built to run all three, together</h3><p>The same Power Platform and business application investment, now the foundation your AI runs on too.</p></div>
-    <div class="arch-stack">
-      <div class="arch-row" style="background:#006BA6"><div class="arch-label">Microsoft 365 Copilot</div><div class="arch-sub">+ clinical-grade governance for healthcare workflows</div></div>
-      <div class="arch-row" style="background:#3f6389"><div class="arch-label">Workforce</div><div class="arch-sub">Microsoft 365 &middot; Word &middot; Excel &middot; PowerPoint &middot; Teams &middot; Outlook</div></div>
-      <div class="arch-row split" style="background:transparent;padding:0">
-        <div style="background:#006BA6;border:1px solid var(--cp-border)"><div class="arch-label">Work IQ</div><div class="arch-sub">How your people work</div></div>
-        <div style="background:#742774;border:1px solid var(--cp-border)"><div class="arch-label">Foundry IQ</div><div class="arch-sub">What your org knows</div></div>
-        <div style="background:#008575;border:1px solid var(--cp-border)"><div class="arch-label">Fabric IQ</div><div class="arch-sub">How your business runs</div></div>
-      </div>
-      <div class="arch-row" style="background:#0d2038"><div class="arch-label">Business applications</div><div class="arch-sub">Low-code custom apps + pre-built apps by line of business: finance, sales, service, supply chain, and more</div></div>
-      <div class="arch-row" style="background:#008575"><div class="arch-label">Data</div><div class="arch-sub">Unifies data across every cloud &mdash; without copying it</div></div>
-      <div class="arch-row" style="background:#123152"><div class="arch-label">Trust</div><div class="arch-sub">Governance, observability, and security across every layer above</div></div>
-      <div class="arch-row" style="background:#071a2e"><div class="arch-label">Foundation</div><div class="arch-sub">One scalable cloud underneath everything above</div></div>
-    </div>
-    <p class="source-note">Architecture simplified for this canvas. Work IQ, Foundry IQ, and Fabric IQ are Microsoft's current published platform terminology; the business-application modules shown are illustrative of Dynamics 365's line-of-business coverage. Validate exact packaging and availability with the account team.</p>
-  </div>
 </section>
 """
 
-PANEL_CONTROL = """
-<section id="control" class="panel" aria-labelledby="control-title">
+PANEL_OPPORTUNITY = """
+<section id="opportunity" class="panel" aria-labelledby="opportunity-title">
   <div class="panel-head">
-    <h2 id="control-title">Govern the intelligence layer from day one.</h2>
-    <p>Agentic AI needs governance, security, observability, and cost control as first-class design points &mdash; not an afterthought. Click a control area below.</p>
-  </div>
-  <div class="card">
-    <div class="section-grid">
-      <div>
-        <div class="pick-grid" id="controlGrid"></div>
-        <div class="takeaway">
-          <span class="mark">#</span>
-          <p>If agents become digital coworkers, Kaiser Permanente and Risant Health need a digital workforce control plane: identity, policy, lifecycle, audit, telemetry, and cost controls &mdash; not six different ones per vendor.</p>
-        </div>
-      </div>
-      <aside class="detail-panel" id="controlDetail" tabindex="0"></aside>
-    </div>
-    <div class="footer-strip">Trust runs across every layer of the platform &mdash; governance, observability, and security, not bolted on after the fact.</div>
-  </div>
-</section>
-"""
-
-PANEL_PAYOFF = """
-<section id="payoff" class="panel" aria-labelledby="payoff-title">
-  <div class="panel-head">
-    <h2 id="payoff-title">What this is worth to Kaiser Permanente + Risant Health.</h2>
+    <h2 id="opportunity-title">What this is worth to Kaiser Permanente + Risant Health.</h2>
     <p>Grounded in Kaiser Permanente's own AI-BPS cost data &mdash; not generic industry benchmarks.</p>
   </div>
 
@@ -620,6 +596,28 @@ PANEL_PAYOFF = """
     </div>
     <p class="source-note">Illustrative: allocates the combined total proportionally by headcount; Kaiser Permanente is the only entity with an independently modeled $391.7M baseline.</p>
   </div>
+</section>
+"""
+
+PANEL_NEW_APPROACH = f"""
+<section id="new-approach" class="panel" aria-labelledby="new-approach-title">
+  <div class="panel-head">
+    <h2 id="new-approach-title">The blue ocean strategy: one platform, five connected IQs.</h2>
+    <p>Not a better version of the same fragmented approach &mdash; a fundamentally different starting point. Real intelligence needs these things connected, not five vendors guessing alone.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><h3>Your enterprise data, unlocked</h3><p>Click each IQ to see what it connects &mdash; the detail sits below, centralized, no matter which you pick.</p></div>
+    <div class="pick-grid-wide" id="fiveThingsGrid"></div>
+    <aside class="detail-panel detail-panel-below" id="fiveThingsDetail" tabindex="0"></aside>
+    <div class="footer-strip">Connected together, this is where real intelligence lives &mdash; most vendors only ever give you one.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><h3>One platform, built to run all five, together</h3><p>The same Power Platform and business application investment, now the foundation your AI runs on too.</p></div>
+    <img class="deck-screenshot" src="{IMG_IQ_PLATFORM}" alt="Microsoft IQ platform architecture: Copilot and Workforce layers on top; Work IQ, Customer IQ, Fabric IQ, Foundry IQ, and Web IQ as the intelligence layer; Power Platform and business applications by line of business; Microsoft Fabric / OneLake reaching across every cloud; governance and trust layers underneath; Azure as the foundation." />
+    <p class="source-note">Architecture simplified for this canvas. Work IQ, Customer IQ, Fabric IQ, Foundry IQ, and Web IQ are Microsoft's current published (and illustrative, in Customer IQ's case) platform terminology; the business-application modules shown are illustrative of Dynamics 365's line-of-business coverage. Validate exact packaging and availability with the account team.</p>
+  </div>
 
   <div class="card">
     <div class="card-header"><h3>Proof it works</h3><p>This isn't theoretical. Grounded AI is already changing how care gets delivered &mdash; these are industry-wide patterns, not Kaiser Permanente-specific results yet.</p></div>
@@ -628,12 +626,9 @@ PANEL_PAYOFF = """
 
   <div class="card">
     <div class="card-header"><h3>The compounding return</h3><p>Total cost of ownership goes down. Value realization goes up.</p></div>
-    <div class="compound-grid">
-      <div class="compound-box down"><div class="big">$355M/yr &rarr; $24.7M/yr</div><div class="lbl">Total cost of ownership (Year 1 &rarr; Year 10, floor scenario)</div></div>
-      <div class="compound-arrow">&harr;</div>
-      <div class="compound-box up"><div class="big">Compounding</div><div class="lbl">Value realization &amp; business process automation as more of the business runs on connected context (illustrative, unitless)</div></div>
-    </div>
-    <div class="footer-strip">Only Microsoft delivers both from one investment: Dynamics 365 and Power Platform lower the cost; Work IQ, Foundry IQ, Fabric IQ, and Copilot compound the value.</div>
+    <img class="deck-screenshot" src="{IMG_COMPOUNDING_CHART}" alt="Chart showing total cost of ownership declining from $355M per year to $24.7M per year over 10 years, while value realization and business process automation rises from siloed, one-off value to connected, compounding value over the same period." />
+    <img class="deck-screenshot" style="margin-top:14px" src="{IMG_ENTERPRISE_DATA}" alt="Your enterprise data, unlocked: Your IQ sits on top of Microsoft IQ, which spans Work IQ, Customer IQ, Fabric IQ, Foundry IQ, and Web IQ. The same investment that lowers your cost also compounds your intelligence, and gets more valuable every year you stay on it." />
+    <div class="footer-strip">Only Microsoft delivers both from one investment: Dynamics 365 and Power Platform lower the cost; Work IQ, Customer IQ, Fabric IQ, Foundry IQ, and Web IQ compound the value.</div>
   </div>
 </section>
 """
@@ -660,6 +655,24 @@ PANEL_PLAN = f"""
     <div class="footer-strip">The subsequent conversation isn't about a bigger license discount. It's about what your data can finally do once it's not scattered across seventeen vendors.</div>
   </div>
 
+  <div class="card">
+    <div class="card-header"><h3>What it takes to get there</h3><p>One decision, two compounding returns &mdash; but only if you actually make the shift.</p></div>
+    <div class="get-there-list">
+      <div class="get-there-step">
+        <span class="get-there-badge" style="background:#64748B">1</span>
+        <div><h5>Avoid the sunk-cost fallacy</h5><p>Stop protecting legacy apps because of what's already been spent on them.</p></div>
+      </div>
+      <div class="get-there-step">
+        <span class="get-there-badge" style="background:#006BA6">2</span>
+        <div><h5>Scrutinize with intention</h5><p>Identify where total cost of ownership can actually come down.</p></div>
+      </div>
+      <div class="get-there-step">
+        <span class="get-there-badge" style="background:#008575">3</span>
+        <div><h5>Reorganize the data estate</h5><p>Knock down application and data silos to extract more value.</p></div>
+      </div>
+    </div>
+  </div>
+
   <div class="close-card">
     <div class="close-logos">
       <img src="{KP_WHITE}" alt="Kaiser Permanente" style="height:28px" />
@@ -677,15 +690,15 @@ PANEL_PLAN = f"""
     <div class="card-header"><h3>Three practical ways to start</h3></div>
     <div class="plan-options">
       <div class="plan-card"><div class="plan-number">01</div><h5>Start with a workshop</h5><p>Validate the $391.7M figure and this year's top consolidation candidates against your own vendor contracts.</p></div>
-      <div class="plan-card"><div class="plan-number">02</div><h5>Pilot one path</h5><p>Stand up one Extend, Build, or Buy scenario against a live workload and measure it end to end.</p></div>
-      <div class="plan-card"><div class="plan-number">03</div><h5>Architect the foundation</h5><p>Map Work IQ, Foundry IQ, and Fabric IQ against your actual systems of record before committing to a platform.</p></div>
+      <div class="plan-card"><div class="plan-number">02</div><h5>Pilot one IQ</h5><p>Stand up one connected IQ workload against a live use case and measure it end to end.</p></div>
+      <div class="plan-card"><div class="plan-number">03</div><h5>Architect the foundation</h5><p>Map Work IQ, Customer IQ, Fabric IQ, Foundry IQ, and Web IQ against your actual systems of record before committing to a platform.</p></div>
     </div>
   </div>
   <p class="source-note" style="margin-top:8px">All cost figures on this canvas (license increase %, implementation cost, maintenance cost, license savings %, TAM figures) are illustrative ranges based on Microsoft field experience and Kaiser Permanente-provided data as of 2026. They are not audited, vendor-published, or contractually guaranteed. The &ldquo;3&ndash;10% YoY SaaS renewal uplift&rdquo; figure and the term &ldquo;SaaSpocalypse&rdquo; reflect widely discussed industry commentary, not audited vendor data. Recommended next step: a joint TCO workshop using actual vendor invoices and contract terms to replace these illustrative figures with validated numbers.</p>
 </section>
 """
 
-BODY = HERO + TABS_NAV + PANEL_PROBLEM + PANEL_APPROACH + PANEL_CONTROL + PANEL_PAYOFF + PANEL_PLAN
+BODY = HERO + TABS_NAV + PANEL_PROBLEM + PANEL_STATUS_QUO + PANEL_OPPORTUNITY + PANEL_NEW_APPROACH + PANEL_PLAN
 print("BODY length:", len(BODY))
 print("CSS length:", len(CSS))
 
@@ -723,19 +736,12 @@ const compareRows = [
   },
 ];
 
-const threeThings = [
+const fiveThings = [
   { title: "How your people work", meta: "Work IQ", color: "#006BA6", detail: "Roles, workflows, files, meetings, and the day-to-day rhythm of the organization. This is the context most Copilots already have some access to." },
-  { title: "What your org knows", meta: "Foundry IQ", color: "#742774", detail: "Policies, documents, research, and the knowledge locked in institutional memory -- usually scattered across SharePoint, wikis, and people's heads." },
+  { title: "How you understand your customers", meta: "Customer IQ", color: "#B8792A", detail: "A unified customer profile with engagement signals -- members, patients, and their history, connected instead of scattered across a contact center, a CRM, and a marketing platform." },
   { title: "How your business runs", meta: "Fabric IQ", color: "#008575", detail: "Data, semantics, rules, and the live signals the business runs on -- claims, encounters, supply chain, finance. Most AI never reaches this layer at all." },
-];
-
-const controlItems = [
-  { title: "Identity", color: "#006BA6", detail: "Every agent has a verifiable identity, not a shared service account buried in a config file." },
-  { title: "Policy", color: "#1464C8", detail: "Who can see what is enforced consistently across every layer, not re-implemented per application." },
-  { title: "Lifecycle", color: "#742774", detail: "Provision, monitor, and retire agents like any other workforce asset, with a clear owner at every stage." },
-  { title: "Audit", color: "#008575", detail: "A complete, queryable trail of what every agent did and why -- essential for healthcare compliance." },
-  { title: "Telemetry", color: "#B8792A", detail: "Observability into performance, cost, and behavior in real time, not discovered after a bad month." },
-  { title: "Cost controls", color: "#A14545", detail: "FinOps guardrails so AI spend scales predictably with usage, not by surprise at renewal." },
+  { title: "What your org knows", meta: "Foundry IQ", color: "#742774", detail: "Policies, documents, research, and the knowledge locked in institutional memory -- usually scattered across SharePoint, wikis, and people's heads." },
+  { title: "What's happening beyond your walls", meta: "Web IQ", color: "#1464C8", detail: "Public and licensed signal from outside the four walls of the organization -- market, regulatory, and competitive context most internal AI never considers." },
 ];
 
 const tamItems = [
@@ -952,8 +958,7 @@ buildStack("stackThen", stackThenItems);
 buildStack("stackNow", stackNowItems);
 wireStackClicks();
 buildCompareRows();
-buildPickGroup("threeThingsGrid", "threeThingsDetail", threeThings, "Connected foundation");
-buildPickGroup("controlGrid", "controlDetail", controlItems, "Control area");
+buildPickGroup("fiveThingsGrid", "fiveThingsDetail", fiveThings, "Connected foundation");
 buildPickGroup("tamGrid", "tamDetail", tamItems, "TAM category", { numbered: false });
 buildSavingsChart();
 buildProofGrid();
