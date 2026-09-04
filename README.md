@@ -12,7 +12,7 @@ Centene and Risant Health "CRM Decision Canvas" hubs.
 | File | Purpose |
 |---|---|
 | `index.html` | Landing page — published at the root of the repo. Branded with Microsoft + Kaiser Permanente + Risant Health logos. |
-| `Kaiser-Risant-CRM-Decision-Canvas.html` | Passcode-gated Decision Canvas. Access code: **`KPRH0903`** |
+| `Kaiser-Risant-App-Value-Inversion.html` | Passcode-gated Decision Canvas. Access code: **`KPRH0903`** |
 | `gate_template.html` | Encryption gate template (used by `encrypt_resource.py`). |
 | `encrypt_resource.py` | Helper to encrypt new resource HTML into a passcode-gated page. |
 | `build_canvas.py` | Generator script for the raw Decision Canvas HTML — edit this, then re-run, rather than hand-editing the generated file. |
@@ -58,7 +58,7 @@ it, re-run the encryption step with a new `--code` value (see below).
 
 2. Upload these files to the repo root (Add file → Upload files):
    - `index.html`
-   - `Kaiser-Risant-CRM-Decision-Canvas.html`
+   - `Kaiser-Risant-App-Value-Inversion.html`
    - `assets/` (used by `index.html`'s header logos)
    - (Optional) `gate_template.html`, `encrypt_resource.py`, `build_canvas.py` if you want them versioned
    - Do **NOT** upload the `raw/` folder — that's the unencrypted source.
@@ -76,14 +76,14 @@ it, re-run the encryption step with a new `--code` value (see below).
 ## Editing the canvas later
 
 Do **not** hand-edit `raw/decision-canvas.html` or the encrypted
-`Kaiser-Risant-CRM-Decision-Canvas.html` directly — edit `build_canvas.py`
+`Kaiser-Risant-App-Value-Inversion.html` directly — edit `build_canvas.py`
 (the CSS, HTML body, and JS data arrays are clearly separated in that file),
 then re-run:
 
 ```
 python build_canvas.py
 python encrypt_resource.py --in raw/decision-canvas.html ^
-    --out Kaiser-Risant-CRM-Decision-Canvas.html ^
+    --out Kaiser-Risant-App-Value-Inversion.html ^
     --code KPRH0903 ^
     --title "Kaiser Permanente + Risant Health Value Inversion Decision Canvas"
 ```
