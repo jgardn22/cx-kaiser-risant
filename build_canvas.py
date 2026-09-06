@@ -39,6 +39,9 @@ IMG_BLIND_SPOT = f"data:image/png;base64,{LOGOS['blind_spot']}"
 IMG_IQ_PLATFORM = f"data:image/png;base64,{LOGOS['iq_platform']}"
 IMG_COMPOUNDING_CHART = f"data:image/png;base64,{LOGOS['compounding_chart']}"
 IMG_ENTERPRISE_DATA = f"data:image/png;base64,{LOGOS['enterprise_data']}"
+# The Big Question pause-moment slide (deck slide 7): full-bleed, dark,
+# minimal, used as-is with no CSS recreation. See render/slide-07.png.
+IMG_BIG_QUESTION = f"data:image/png;base64,{LOGOS['big_question']}"
 
 # ============================================================== CSS =======
 CSS = """
@@ -211,6 +214,20 @@ h1 em { color: var(--cp-accent); font-style: italic; }
 .deck-screenshot {
   display: block; width: 100%; height: auto; border-radius: 12px;
   border: 1px solid var(--cp-border); margin: 10px 0;
+}
+
+/* full-bleed single-image panel (e.g. The Big Question pause moment): no card,
+   no header, no footer strip, just the slide, centered and breathing */
+.big-question-panel { display: flex; align-items: center; justify-content: center; min-height: 560px; padding: 20px 0; }
+.big-question-panel img {
+  display: block; width: 100%; max-width: 1100px; height: auto; border-radius: 18px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.35); border: 1px solid var(--cp-border);
+}
+
+/* visually hidden but still exposed to screen readers / accessibility tree */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
 }
 
 /* "what it takes to get there" numbered step list */
@@ -411,7 +428,7 @@ HERO = f"""
   </div>
   <p class="eyebrow"><span class="pulse-dot" aria-hidden="true"></span> Kaiser Permanente + Risant Health &middot; Executive decision canvas</p>
   <h1>The Enterprise Application <em>Value Inversion</em></h1>
-  <p class="lede">The total cost of your application portfolio is inverting. This canvas walks the strategic argument, the Kaiser Permanente-specific economics, and the practical next step: click through Problem, Status Quo, Opportunity, New Approach, and Plan.</p>
+  <p class="lede">The total cost of your application portfolio is inverting. This canvas walks the strategic argument, the Kaiser Permanente-specific economics, and the practical next step: click through Problem, Status Quo, The Big Question, Opportunity, New Approach, and Plan.</p>
   <div class="hero-foot">
     <span>Prepared by Microsoft for Kaiser Permanente + Risant Health &middot; confidential</span>
     <span>All figures illustrative unless noted; see Plan tab for sourcing</span>
@@ -427,14 +444,17 @@ TABS_NAV = """
   <button class="tab-button" data-tab="status-quo" data-tip-title="Status Quo" data-tip="Show what the status quo approach actually looks like today: Copilots that only see one system, and the fragmented-context research proving why most enterprise AI never pays off.">
     <span class="tab-num">02</span>Status Quo
   </button>
+  <button class="tab-button" data-tab="big-question" data-tip-title="The Big Question" data-tip="The burner is already on. A pause moment: in five years, will you look back and wish you'd taken a different strategy?">
+    <span class="tab-num">03</span>The Big Question
+  </button>
   <button class="tab-button" data-tab="opportunity" data-tip-title="Opportunity" data-tip="Ground the argument in Kaiser Permanente's own numbers: the $391.7M TAM, the 10-year savings model, and what it's worth split across Kaiser Permanente + Risant Health.">
-    <span class="tab-num">03</span>Opportunity
+    <span class="tab-num">04</span>Opportunity
   </button>
   <button class="tab-button" data-tab="new-approach" data-tip-title="New Approach" data-tip="The blue ocean strategy: one platform with five connected IQs, the full Microsoft IQ architecture, and proof the compounding return is real.">
-    <span class="tab-num">04</span>New Approach
+    <span class="tab-num">05</span>New Approach
   </button>
   <button class="tab-button" data-tab="plan" data-tip-title="Plan" data-tip="The harder question that matters more than scrutiny, and what it takes to get there.">
-    <span class="tab-num">05</span>Plan
+    <span class="tab-num">06</span>Plan
   </button>
 </nav>
 """
@@ -535,6 +555,15 @@ PANEL_STATUS_QUO = f"""
     </div>
     <div class="footer-strip">The problem was never the model. It's what the model can't see, and it costs trust at the exact moments Kaiser Permanente and Risant Health's mission depends on it most.</div>
     <p class="source-note">Industry-wide research findings, not Kaiser Permanente or Risant Health-specific data. Care-journey pattern is illustrative, based on common cross-system handoff points in large integrated delivery networks.</p>
+  </div>
+</section>
+"""
+
+PANEL_BIG_QUESTION = f"""
+<section id="big-question" class="panel" aria-labelledby="big-question-title">
+  <h2 id="big-question-title" class="sr-only">The Big Question</h2>
+  <div class="big-question-panel">
+    <img src="{IMG_BIG_QUESTION}" alt="The burner under the pot is already on. The enterprise application value inversion is already under way. In five years, will you look back and wish you'd taken a different strategy?" />
   </div>
 </section>
 """
@@ -684,7 +713,7 @@ PANEL_PLAN = f"""
 </section>
 """
 
-BODY = HERO + TABS_NAV + PANEL_PROBLEM + PANEL_STATUS_QUO + PANEL_OPPORTUNITY + PANEL_NEW_APPROACH + PANEL_PLAN
+BODY = HERO + TABS_NAV + PANEL_PROBLEM + PANEL_STATUS_QUO + PANEL_BIG_QUESTION + PANEL_OPPORTUNITY + PANEL_NEW_APPROACH + PANEL_PLAN
 print("BODY length:", len(BODY))
 print("CSS length:", len(CSS))
 
