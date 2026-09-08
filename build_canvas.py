@@ -150,7 +150,7 @@ button, input, select { font: inherit; }
 }
 @keyframes pulse { 0%,100% { transform: scale(0.94); opacity: 0.72; } 50% { transform: scale(1.18); opacity: 1; } }
 h1 { max-width: 980px; margin: 0; font-size: clamp(2rem, 4vw, 4rem); line-height: 1.02; letter-spacing: -0.04em; }
-h1 em { color: var(--cp-accent); font-style: italic; }
+h1 em { color: var(--cp-accent); font-style: italic; white-space: nowrap; }
 .hero p.lede { max-width: 900px; margin: 14px 0 0; color: var(--cp-text-muted); font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 1.5; }
 .hero-foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-top: 18px; font-size: 0.82rem; color: var(--cp-text-soft); }
 
@@ -427,7 +427,7 @@ HERO = f"""
     <img id="logo-risant" src="{RISANT_COLOR}" alt="Risant Health" />
   </div>
   <p class="eyebrow"><span class="pulse-dot" aria-hidden="true"></span> Kaiser Permanente + Risant Health &middot; Executive decision canvas</p>
-  <h1>The Enterprise Application <em>Value Inversion</em></h1>
+  <h1>The Enterprise Application<br/><em>Value Inversion</em></h1>
   <p class="lede">The total cost of your application portfolio is inverting. This canvas walks the strategic argument, the Kaiser Permanente-specific economics, and the practical next step: click through Problem, Status Quo, The Big Question, Opportunity, New Approach, and Plan.</p>
   <div class="hero-foot">
     <span>Prepared by Microsoft for Kaiser Permanente + Risant Health &middot; confidential</span>
